@@ -94,8 +94,9 @@
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
 \author[J. W. Eatson et al.]{
-J. W. Eatson\thanks{E-mail: \href{mailto:py13je@leeds.ac.uk}{py13je@leeds.ac.uk}} \&
-J. M. Pittard
+J. W. Eatson\thanks{E-mail: \href{mailto:py13je@leeds.ac.uk}{py13je@leeds.ac.uk}},
+J. M. Pittard \&
+S. Van Loo
 \\
 School of Physics and Astronomy, University of
        Leeds, Woodhouse Lane, Leeds LS2 9JT, UK\\  
@@ -724,8 +725,9 @@ Higher threshold values were found to be inaccurate at large distances from the 
 \label{sec:p1-results}
 
 The first set of simulations were performed in order to assess whether the implemented cooling model would influence dust formation within the WCR.
-This was found to be the case, figure \ref{fig:coolingprocess-dustproduction} shows that without cooling only a marginal amount of dust formation occurs.
-Dust production for both radiative simulations with cooling processes were significantly higher, with the \texttt{fullcool} simulation having consistently higher dust formation rates than the \texttt{plasmacool} simulation.
+This was found to be the case.
+Figure \ref{fig:coolingprocess-dustproduction} shows that with no cooling only a very small amount of dust formation occurs.
+Dust production in the radiative simulations is significantly higher, with the \texttt{fullcool} simulation having consistently higher dust formation rates than the \texttt{plasmacool} simulation.
 This is a sensible result, as figure \ref{fig:postshockcoolcomparison} shows that at immediate post shock temperatures nascent dust grains present can influence immediate post-shock cooling, allowing the wind to reach temperatures low enough for dust formation faster than if only plasma cooling was simulated.
 
 \begin{figure}
@@ -1018,7 +1020,7 @@ This matches observations of episodic dust forming systems, where infrared emiss
   \texttt{dsep-64AU} & 0.01   & 19.1 & 30638 & \num{2.41e-14} & \num{9.06E-07} \\ \hline
   \end{tabular}
   \caption{Rates of dust production for separation distance set.}
-  \label{tab:radiative-average-rates}
+  \label{tab:dsep-average-rates}
 \end{table}
 
 
@@ -1044,7 +1046,9 @@ to explore how closely they match observations.
 
 \subsection{Wind mixing within the WCR}
 
-While interaction between hydrogen and dust grains is not simulated by the dust model, \cite{leteuffModelDustFormation2002} notes that hydrogen could be a potential catalyst for amorphous carbon grain formation.
+While interaction between hydrogen and dust grains is not simulated by the dust model, elements such as hydrogen are crucial for forming complex organic molecules.
+As the WC wind is extremely hydrogen-poor, significant wind mixing would need to occur
+\citep{herbstComplexOrganicInterstellar2009}.
 Figure \ref{fig:radiative-windmixing} shows that the wind is far more effectively mixed by instabilities if it is sufficiently radiative.
 An improved dust model which can calculate grain yields from chemical reactions could be used to investigate this further.
 Conveniently, implementation of a chemical model into Athena++ through passive scalars is a future feature in the projects roadmap.
@@ -1084,7 +1088,7 @@ We thank the publication referee for feedback and corrections to the text.
 
 
 \bibliographystyle{mnras}
-\bibliography{references.bib} % if your bibtex file is called example.bib
+\bibliography{ref-parameter.bib} % if your bibtex file is called example.bib
 
 % Don't change these lines
 \bsp	% typesetting comment
