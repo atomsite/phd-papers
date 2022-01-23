@@ -123,7 +123,8 @@ School of Physics and Astronomy, University of
 \begin{abstract}
 \noindent
 Dust production is one of the more curious phenomena observed in massive binary systems with interacting winds.
-The high wind temperatures, UV photon flux and violent shocks should destroy any dust grains that condense, however a handful of systems have been observed producing dust with yields of approximately 30\% of the total mass of the stellar winds, in extreme cases.
+The high wind temperatures, UV photon flux and violent shocks should destroy any dust grains that condense.
+However, a handful of systems have been observed producing dust with yields of approximately 30\% of the total mass of the stellar winds, in extreme cases.
 In order to better understand this phenomenon a parameter space exploration was performed using a series of numerical models of dust producing carbon phase Wolf-Rayet (WCd) systems.
 These models incorporated a passive scalar dust model simulating dust growth, destruction and radiative cooling.
 Sensible dust yields were produced by these simulations, with significant changes that were not solely due to the changing mass loss rates in the systems.
@@ -1060,6 +1061,13 @@ to explore how closely they match observations.
 
 \subsection{Wind mixing within the WCR}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{assets/results/radiative/radiative-r0.pdf}
+  \caption[Wind mixing due to radiative methods]{Wind ``colour'' for \texttt{nocool} and \texttt{fullcool} models. The WCR is more thoroughly mixed if the simulation is allowed to cool.}
+  \label{fig:radiative-windmixing}
+\end{figure}
+
 While interaction between hydrogen and dust grains is not simulated by the dust model, elements such as hydrogen are crucial for forming complex organic molecules.
 As the WC wind is extremely hydrogen-poor, significant wind mixing would need to occur
 \citep{herbstComplexOrganicInterstellar2009}.
@@ -1069,13 +1077,6 @@ Conveniently, implementation of a chemical model into Athena++ through passive s
 Additionally, a multi-fluid model could be used to model the dynamics of grains, as larger grains may not necessarily be co-moving in a turbulent wind environment.
 % Improvements to model, multi-wind model, astrochemical model? Extremely large bounds for future work
 % Mention single wind WC grain formation
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{assets/results/radiative/radiative-r0.pdf}
-  \caption[Wind mixing due to radiative methods]{Wind ``colour'' for \texttt{nocool} and \texttt{fullcool} models. The WCR is more thoroughly mixed if the simulation is allowed to cool.}
-  \label{fig:radiative-windmixing}
-\end{figure}
 
 \section{Summary}
 
@@ -1100,6 +1101,7 @@ We thank the publication referee for feedback and corrections to the text.
 
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
 
+\newpage % This might be optionally needed, prevents last figure from getting put in the middle of references
 
 \bibliographystyle{mnras}
 \bibliography{ref-parameter.bib} % if your bibtex file is called example.bib
