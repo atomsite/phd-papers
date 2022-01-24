@@ -248,9 +248,9 @@ Simulations are generated in 3D and the Euler hydrodynamical equations are solve
 
 \begin{subequations}
   \begin{align}
-    & \frac{\partial\rho}{\partial t}+\nabla \cdot \left(\rho \boldsymbol{u}\right) = 0 , \\
-    & \frac{\partial \rho \boldsymbol{u}}{\partial t} + \nabla \cdot \left(\rho \boldsymbol{u} u + P \right) = 0, \\
-    & \frac{\partial \rho \varepsilon}{\partial t} + \nabla \cdot \left[ \boldsymbol{u} \left( \rho\varepsilon + P \right) \right] = \dot E\rms{cool} , 
+    \frac{\partial\rho}{\partial t} & + \nabla \cdot \left(\rho \boldsymbol{u}\right) = 0 , \\
+    \frac{\partial \rho \boldsymbol{u}}{\partial t} & + \nabla \cdot \left(\rho \boldsymbol{u} u + P \right) = 0, \\
+    \frac{\partial \rho \varepsilon}{\partial t} & + \nabla \cdot \left[ \boldsymbol{u} \left( \rho\varepsilon + P \right) \right] = \dot E\rms{cool} , 
   \end{align}
 \end{subequations}
 
@@ -287,9 +287,9 @@ This rewrite corresponds to a change in density, $\rho \rms R$, pressure, $P \rm
 
 \begin{subequations}
   \begin{align}
-    & \rho \rms R = \frac{\dot M}{(4 \pi r^2 v_\infty)} , \\
-    & P \rms R    = \rho \rms R k \rms B T \rms w / \mu m \rms H , \\
-    & E\rms R    = \frac{P \rms R}{\gamma - 1} + \frac{1}{2} \rho \rms R v_\infty^2 ,
+    \rho \rms R & = \frac{\dot M}{(4 \pi r^2 v_\infty)} , \\
+    P \rms R    & = \rho \rms R k \rms B T \rms w / \mu m \rms H , \\
+    E\rms R   &  = \frac{P \rms R}{\gamma - 1} + \frac{1}{2} \rho \rms R v_\infty^2 ,
   \end{align}
 \end{subequations}
 
@@ -504,19 +504,21 @@ where $\rho_\text{g}$ is the gas density and $n_\text{d}$ is the grain number de
 In this paper we take $\xi_a = 0.1$ as a conservative value, though this value can rise to as high as $1$ in the case of highly charged grains.
 A bulk density analogous to amorphous carbon grains of \SI{3}{\gram\per\centi\metre\cubed} is also used.
 
-Dust destruction is calculated via gas-grain sputtering using the \cite{draine_destruction_1979} prescription - a dust grain has a lifespan, $\tau$, which is dependent on the grain radius and the number density of the gas the grain is moving through.
-Assuming a spherical grain, the rate of change in mass and radius can be calculated as:
+Dust destruction is calculated via gas-grain sputtering using the \cite{draine_destruction_1979} prescription - a dust grain has a normalised lifespan, $\tau$, which is dependent on the grain radius, and the number density of the gas the grain is moving through, $n\rms{g}$.
+In the case of spherical amorphous carbon grains, this normalised lifespan is found to be $\tau\rms{d} \approx \SI{1}{\mega\year} \times a/n\rms{g}$.
+% Assuming a spherical grain, the rate of change in mass and radius can be calculated as:
+The rate of change in grain radius, $da/dt$, and grain mass, $dm\rms{gr}/dt$, as well as the overall dust mass, $m\rms{d}$, and dust density, $\rho\rms{d}/dt$ can be calculated with the formulae:
 
 \begin{subequations}
   \begin{align}
-    \tau \rms{d} & = 1 \, \si{\mega\year} \times \frac{a}{n \rms{g}} , \\
-    \frac{da}{dt} & = - \frac{a}{\tau \rms{d}} , \\
-    \frac{dm}{dt} & = -1.33 \times 10^{-13} a^2 n \rms{g} n \rms{d} \rho \rms{gr} ,
+    \frac{da}{dt} & = - \frac{a}{\tau \rms d} , \\
+    \frac{dm\rms{gr}}{dt} & = \frac{m \rms d}{\tau\rms{d}} = \frac{4 \pi a^3 \rho\rms{gr} }{3 \tau\rms{d}} , \\
+    \frac{d \rho\rms{d}}{dt} & = \frac{dm}{dt} n\rms{d} .
   \end{align}
 \end{subequations}
 
 \noindent
-where $n \rms{g}$ is the gas number density.
+% where $n \rms{g}$ is the gas number density.
 The value for the normalised grain lifespan of \SI{1}{\mega\year\micro\metre\per\centi\metre\cubed} is based on an average lifespan of dust grains in interstellar shocks with shock temperatures between $10^6$ and $\SI{3e8}{\kelvin}$ from \cite{dwekCoolingSputteringInfrared1996}, with additional work by \cite{tielens_physics_1994}.
 
 Application of the dust growth and destruction routines in the code is determined by the gas temperature of a cell.
