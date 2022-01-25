@@ -488,22 +488,26 @@ Dust growth is modelled through approximating growth due to grain-gas accretion 
 Assuming a single average grain size the rate of change in the average grain radius is given by
 
 \begin{equation}
-  \frac{da}{dt} = \frac{\xi_\text{a} \rho\rms{C} w_\text{a}}{4 \rho\rms{gr}} ,
+  \frac{da}{dt} = \frac{\xi \rho\rms{C} w_\text{C}}{4 \rho\rms{gr}} ,
 \end{equation}
 
 \noindent
-where $w_a$ is the Maxwell-Boltzmann distribution RMS velocity for carbon:
+where $w\rms{a}$ is the Maxwell-Boltzmann distribution RMS velocity for carbon
 
 \begin{equation}
-  w\rms{a} = \sqrt\frac{3 k\rms{B} T}{12 m\rms{H}},
+  w\rms{C} = \sqrt\frac{3 k\rms{B} T}{12 m\rms{H}},
 \end{equation}
 
 \noindent
-$\xi_a$ is the grain sticking efficiency, $\rho\rms{C}$ is the carbon density in the gas and $\rho_\text{gr}$ is the grain bulk density.
+$\xi$ is the grain sticking efficiency, $\rho\rms{C}$ is the carbon density in the gas and $\rho_\text{gr}$ is the grain bulk density.
 The associated rate of dust density change is found to be
 
+% \begin{equation}
+%   \frac{d\rho_\text{d}}{dt}  = 4 \pi a^2 \rho\rms{gr} n_\text{d} \frac{da}{dt} , 
+% \end{equation}
+
 \begin{equation}
-  \frac{d\rho_\text{d}}{dt}  = 4 \pi a^2 \rho\rms{gr} n_\text{d} \frac{da}{dt} , 
+  \frac{d\rho\rms{d}}{dt} = \pi a^2 w\rms{C} \rho\rms{C} \xi n\rms{d},
 \end{equation}
 
 \noindent
