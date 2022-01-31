@@ -78,6 +78,11 @@
 % Author commands
 \newcommand{\ts}{\textsuperscript}
 
+% Math macros 
+\newcommand{\swr}{\ensuremath{_{\text{WR}}}}
+\newcommand{\sob}{\ensuremath{_{\text{OB}}}}
+\newcommand{\rms}[1]{\ensuremath{_{\text{#1}}}}
+
 % Please keep new commands to a minimum, and use \newcommand not \def to avoid
 % overwriting existing commands. Example:
 %\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
@@ -93,9 +98,8 @@
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
 \author[J. W. Eatson et al.]{
-J. W. Eatson\thanks{E-mail: \href{mailto:py13je@leeds.ac.uk}{py13je@leeds.ac.uk}},
-J. M. Pittard \&
-S. Van Loo
+J. W. Eatson\thanks{E-mail: \href{mailto:py13je@leeds.ac.uk}{py13je@leeds.ac.uk}} \&
+J. M. Pittard
 \\
 School of Physics and Astronomy, University of
        Leeds, Woodhouse Lane, Leeds LS2 9JT, UK\\  
@@ -132,7 +136,34 @@ stars: Wolf-Rayet -- methods: numerical -- binaries: general
 
 \section{Introduction}
 
+The dynamics of massive stars in binary systems is a particularly fascinating subject.
+These incredibly violent systems are obscured behind vast clouds of outflowing stellar wind, the result of the most massive stars we know of slowly tearing themselves asunder.
+Despite powerful winds, extreme temperatures, and intense astrophysical shocks from these colliding winds, interstellar dust
 
+% Observational history, define acronyms commonly used
+
+
+% Dust production yields
+
+In fact, these dust producing CWB (WCd) systems can produce an extreme quantity of dust.
+Typically around $1\%$ of the stellar wind is converted into dust a short amount of time after wind collision, but in the case of more prolific systems such as WR104 this can be as high as $36\%$ \citep{lauRevisitingImpactDust2020}.
+This corresponds to dust production rates on the order of $10^{-6} \, \si{\solarmass\per\year}$, rivalling other profuse dust producing phenomena such as AGB stars.
+
+% Difficulty of detailed observation
+While we know that truly colossal amounts of dust form in these systems through infrared observation, we find that the mechanisms involved in 
+
+% Dust formation particulars
+% Dust forms in wcr
+Observations conclude that dust forms exclusively within the WCR of the system,
+% Dust forms close to system
+observations also indicate that dust formation occurs rapidly and close to the system
+\citep{williamsInfraredPhotometryLatetype1987,williamsMultifrequencyVariationsWolfrayet1990},
+
+this is further backed up by grain 
+
+% Bringing it all together, theories as to how dust formation occurs, density, shielding etc.
+
+% What we intend to do in this project
 
 In this paper we will discuss our methodology in section 
 
@@ -205,22 +236,33 @@ Dust is grown through grain accretion using formulae described by \citep{spitzer
 
 %//TODO I have copy-pasted some paragraphs from paper 1, this needs to be fixed up a bit or streamlined. 
 
+
 \begin{subequations}
   \begin{align}
-        \frac{da}{dt} & = \frac{\xi_a \rho_{Gr} w_a}{4 \rho} , \\
-    \frac{\rho_D}{dt} & = 4 \pi a^2 \rho n_D \frac{da}{dt}   , 
+    \frac{da}{dt} & = \frac{\xi \rho\rms{C} w_\text{C}}{4 \rho\rms{gr}} , \\
+    \frac{dm\rms{gr}}{dt} & = 4\pi \rho\rms{gr} \frac{da}{dt} a^2 = \pi \xi \rho\rms{C} w\rms{C} a^2, \\
+    \frac{d\rho\rms{d}}{dt} & = \frac{dm\rms{gr}}{dt} n\rms{d} ,
   \end{align}
 \end{subequations}
 
+\noindent
+
+\textbf{THIS PART NEEDS FIXING AFTER PAPER 1 SORTED}
+
 where $w_a$ is the Maxwell-Boltzmann distribution RMS velocity, $\xi_a$ is the grain sticking efficiency, $\rho_{Gr}$ is the grain bulk density, $\rho$ is the gas density, $a$ is the dust grain radius, and $n_D$ is the grain number density. For these simulations, the grain sticking factor has been set to $10\%$, while for low temperature collisions a sticking factor of $100\%$ can be proven, grain sticking in a more energetic, hot regime could significantly reduce the probability of sticking. 
 
-Dust destruction is calculated via gas-grain sputtering using the Draine \& Salpeter prescription - a dust grain has a lifespan, $\tau$, which is dependent on the grain radius, as the grain loses radius proportional to its loss in mass; assuming a spherical grain, the rate of change in mass and radius can be calculated through the following equation:
+Dust destruction is calculated via gas-grain sputtering using the Draine \& Salpeter prescription - a dust grain has a lifespan, $\tau$, which is dependent on the grain radius, 
+
+\begin{equation}
+  \frac{da}{dt} = \tau n\rms{g},
+\end{equation}
+
+as the grain loses radius proportional to its loss in mass; assuming a spherical grain, the rate of change in mass and radius can be calculated through the following equation:
 
 \begin{subequations}
   \begin{align}
-           \tau_D & = 1 \, \text{Myr} \times \frac{a}{n_g} , \\
-    \frac{da}{dt} & = - \frac{a}{\tau_D} , \\
-    \frac{dm}{dt} & = -1.33 \times 10^{-13} a^2 n_g n_d \rho_{Gr} ,
+    \frac{d m\rms{gr}}{dt} & = \frac{4}{3} \pi \tau \rho\rms{gr} n\rms{g} a^2 , \\
+    \frac{d \rho\rms{d}}{dt} & = \frac{d m\rms{gr}}{dt} n\rms{d}.
   \end{align}
 \end{subequations}
 
@@ -229,8 +271,8 @@ Dust destruction is calculated via gas-grain sputtering using the Draine \& Salp
 
 % Discuss importance of WR 140 system
 
-WR 140 was simulated for this paper as it represents an archetypical episodic CWB system, whose infrared dust emission peaks around periastron passage.
-WR 140 deviates from WR 98a and WR 104 by being extremely eccentric, which significantly effects the cooling parameter as the orbit progresses.
+WR 140 was simulated in this paper as it is considered to be the archetypical episodic CWB system, whose infrared dust emission peaks around periastron passage.
+WR 140 deviates from WR 98a and WR 104 by having an extremely eccentric orbit, which significantly effects the cooling parameter as the orbit progresses.
 Additionally, the minimum value for $\chi$ is significantly larger than the other systems, and hence cooling would be less dominant on the dynamics of the WCR, even at periapsis.
 Though these simulations do not calculate wind acceleration due to radiative line driving, both stellar winds are expected to be accelerated close to their terminal wind velocities \citep{lamersIntroductionStellarWinds1999}.
 However, this discrepancy should be noted when considering the results of this paper.
@@ -279,15 +321,15 @@ A typical wind composition for WC stars was assumed for the Wolf-Rayet star, whi
 
 Due to computing limitations, a complete orbit could not be completed without AMR, instead, a section of the systems orbit, corresponding to an orbital phase of $0.95 \leq \Phi \leq 1.10$ was simulated, where $\Phi$ is the orbital phase.
 This section represents the period prior to periastron passage, as well as a brief period after periastron
-(fig. \ref{fig:p2-trajectory}).
+(Fig. \ref{fig:p2-trajectory}).
 This represents a period of approximately \num{1.2} years of the systems orbit, and the period where much of the dust forms \citep{crowther_dust_2003}.
 The simulation was run with two different numerical integrators, a 3\ts{rd} order accurate Runge-Kutta integrator (\texttt{rk3}) and a 4\ts{th} order accurate, 5-stage, 3 storage register strong stability preserving Runge-Kutta integrator (\texttt{ssprk5\_4})
 \citep{ruuthHighOrderStrongStabilityPreservingRungeKutta2005}.
 The \texttt{ssprk5\_4} integrator was found to be approximately 60\% slower, but markedly more stable.
-Prior to periastron passage the \texttt{rk3} integrator was used for its speed, but increasing numerical instability as the stars grew closer resulted in this proving untenable.
-Over periastron passage the average time-step was found to reduce by an order of magnitude, resulting in a corresponding increase to simulation time (fig. \ref{fig:p2-timestep}).
-At the most numerically complex portion of the work, a Courant number of $C = 0.04$ has to be used instead of the initial value of $C = 0.15$.
-This reduced value was used to preserve numerical stability.
+Prior to periastron passage the \texttt{rk3} integrator was used for its speed, but increasing numerical instability as the stars grew closer resulted in this proving untenable, and was switched to \texttt{ssprk5\_4}.
+Over periastron passage the average time-step was found to reduce by an order of magnitude, resulting in a corresponding increase to simulation time (Fig. \ref{fig:p2-timestep}).
+At the most numerically complex portion of the simulation, a Courant number of $C = 0.04$ had to be used instead of the initial value of $C = 0.15$, in order to preserve numerical stability.
+As the simulation moved past periastron the Courant number was increased every 24 hours of wall time, until $C$ returned to the initial value.
 
 The simulation was conducted on the ARC4 HPC cluster at the University of Leeds with 128 cores.
 The code was compiled using the Intel \texttt{ICPC} compiler using \texttt{AVX512} optimisations and the Intel MPI library.
@@ -306,7 +348,16 @@ The code was compiled using the Intel \texttt{ICPC} compiler using \texttt{AVX51
   \label{fig:p2-timestep}
 \end{figure}
 
+\section{Results}
 
+% Dust production rate
+
+% Instabilities
+
+
+\section{Conclusion}
+
+\section{Acknowledgements}
 
 
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
