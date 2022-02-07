@@ -83,6 +83,9 @@
 \newcommand{\sob}{\ensuremath{_{\text{OB}}}}
 \newcommand{\rms}[1]{\ensuremath{_{\text{#1}}}}
 
+\newcommand{\mdot}{\dot{\text{M}}}
+\newcommand{\dsep}{d\rms{sep}}
+
 % Please keep new commands to a minimum, and use \newcommand not \def to avoid
 % overwriting existing commands. Example:
 %\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
@@ -138,38 +141,77 @@ stars: Wolf-Rayet -- methods: numerical -- binaries: general
 
 The dynamics of massive stars in binary systems is a particularly fascinating subject.
 These incredibly violent systems are obscured behind vast clouds of outflowing stellar wind, the result of the most massive stars we know of slowly tearing themselves asunder.
-Despite powerful winds, extreme temperatures, and intense astrophysical shocks from these colliding winds, interstellar dust
-
 % Observational history, define acronyms commonly used
-
-
-% Dust production yields
-
-In fact, these dust producing CWB (WCd) systems can produce an extreme quantity of dust.
-Typically around $1\%$ of the stellar wind is converted into dust a short amount of time after wind collision, but in the case of more prolific systems such as WR104 this can be as high as $36\%$ \citep{lauRevisitingImpactDust2020}.
+Colliding Wind Binary (CWB) systems were first hypothesised as an explanation of the source of highly luminous and variable x-ray sources such as V444 Cyg and $\gamma^2$ Vel \citep{prilutskii_x_1976}.
+These extremely bright emissions were due to stellar wind collision with shock velocities in the order of $10^3 \, \si{\kilo\metre\per\second}$.
+The variability in x-ray emission is easily explained in the case of a binary system due to a number of factors, such as the Wind Collision Region (WCR) being occluded by the outflowing stellar wind, being occluded by the stars themselves, or the system can have an eccentric orbit, reducing the shock strength as the orbital separation, $d\rms{sep}$, changes.
+Despite this dust-hostile environment, CWB systems containing a Wolf-Rayet carbon phase star (WC) have been observed producing copious quantities of dust (so-called WCd systems).
+These systems, where the WC star is typically paired with a main sequence OB star, typically convert around $1\%$ of the stellar wind into dust a short time after wind collision.
+In more prolific systems such as WR104, however, the dust-to-gas mass fraction, $z$, of the system can be as high as $36\%$ \citep{lauRevisitingImpactDust2020}.
 This corresponds to dust production rates on the order of $10^{-6} \, \si{\solarmass\per\year}$, rivalling other profuse dust producing phenomena such as AGB stars.
 
-% Difficulty of detailed observation
-While we know that truly colossal amounts of dust form in these systems through infrared observation, we find that the mechanisms involved in 
-
-% Dust formation particulars
-% Dust forms in wcr
-Observations conclude that dust forms exclusively within the WCR of the system,
+WCd systems can sub-categorised further, into persistent, variable and episodic dust forming systems.
+Persistent systems, such as WR104 \citep{tuthill_dusty_1999}, produce dust at a constant rate, and as such produce extreme quantities of dust, as well as well-defined pinwheel patterns if the system is viewed face-on.
+Episodic systems, meanwhile, only produce dust for a limited period, before entering a period of dormancy; this pattern is cyclical, and is predictably periodic.
+A good example of such an episodic system is WR140, the subject of this paper \citep{williamsMultifrequencyVariationsWolfrayet1990}.
+Variable systems have some characteristics of these two sub-types, having a distinct variability without a period of dust producing dormancy, such as WR98a \citep{monnierPinwheelNebulaWR1999}.
+Whether a system is persistent, variable or episodic is based on the systems orbital eccentricity, highly eccentric systems appear to form episodic systems, with the ``active'' dust production period occurring immediately after periastron passage, and a relatively short time thereafter.
+Meanwhile, persistent and variable systems have been observed to have more circular orbits, suggesting that the effect of a change in system separation distance, $d\rms{sep}$, has a role in dust formation.
+The initial mechanism behind dust formation is not well understood, whilst nascent amorphous carbon dust grain cores can form condense within the photosphere of WC7-9 stars,
+%%//TODO CITE THIS 
+these grain cores would be vaporised by UV flux of both stars.
+However, within the WCR these grains appear to flourish, observations of these systems show that infrared excess in wavelengths associated with amorphous grains is detected almost exclusively within the post-shock WCR \citep{soulainSPHEREViewWolfRayet2018}.
 % Dust forms close to system
-observations also indicate that dust formation occurs rapidly and close to the system
-\citep{williamsInfraredPhotometryLatetype1987,williamsMultifrequencyVariationsWolfrayet1990},
-
-this is further backed up by grain 
-
+Observations also indicate that dust formation occurs rapidly and close to the system, this requires strong radiative cooling for the immediate-post shock temperature to reduce from $\sim 10^8 \, \si{\kelvin}$ to $\sim 10^4 \, \si{\kelvin}$
+\citep{williamsInfraredPhotometryLatetype1987,williamsMultifrequencyVariationsWolfrayet1990}.
 % Bringing it all together, theories as to how dust formation occurs, density, shielding etc.
+As such, dust formation appears to be encouraged in the WCR through a multitude of factors:
 
+\begin{itemize}
+  \item The high density of the post-shock WCR results in a high collision rate between carbon atoms and dust grains.
+  \item The WCR shields nascent dust grains from the bulk of the UV emission from the stars.
+  \item The rapid cooling in the immediate post-shock environment reduces gas-grain sputtering.
+  \item Strong radiative cooling drives the formation of thermal instabilities, which produces clumps of cool, high density gas where dust can rapidly grow.
+\end{itemize}
+
+\noindent
+This dust formation can also be influenced by orbital separation, velocity shear and momentum ratio imbalance between the winds, producing variability.
+
+\begin{table}
+  \centering
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{lllllll}
+    \hline
+    & \multicolumn{2}{c}{Persistent} & \multicolumn{2}{c}{Variable} & \multicolumn{2}{c}{Episodic} \\ \cline{2-7} 
+    & Total & Example & Total & Example & Total & Example \\ \hline
+   WC4 & 1 & WR19 & 0 & --- & 0 & --- \\
+   WC5 & 0 & --- & 0 & --- & 1 & WR47C \\
+   WC6 & 1 & WR124-10 & 0 & --- & 0 & --- \\
+   WC7 & 3 & WR102-22 & 0 & --- & 4 & WR140 \\
+   WC8 & 6 & WR13 & 1 & WR48a & 3 & WR122-14 \\
+   WC9 & 45 & WR104 & 6 & WR98a & 1 & WR75-11 \\ \hline
+   Total & 56 &  & 7 &  & 9 &  \\ \hline
+  \end{tabular}
+  }
+  \caption[Numer of confirmed WCd systems]{Number of confirmed WCd systems with known spectral type and dust formation type from the Galactic Wolf Rayet Catalogue \citep{rossloweSpatialDistributionGalactic2015}. Systems with uncertain spectral types not included, while systems labelled ``d'' are included within the ``persistent'' category for their associated spectral type.}
+  \label{tab:p2-wc-summated-list}
+\end{table}
+
+% Why not observe?
+WCd systems are comparatively rare, out of 106 confirmed systems with a WR binary, only 9 are found to be categorised as episodic WCd systems
+(Table \ref{tab:p2-wc-summated-list}).
+This makes observation of these systems difficulty, as these systems have a typical distance on the order of $1-10 \, \si{\kilo\parsec}$.
+Whilst these systems can be observed and the dusty WCR can be resolved, observation of the innermost, immediate post-shock dust forming region is not possible at this distance.
+As such, numerical simulation is necessary to determine dust formation in WCd systems, a contemporary example of such simulations is \cite{hendrix_pinwheels_2016}, though simulation of the evolution of dust grains, through cooling, growth and sputtering was not performed.
 % What we intend to do in this project
-
-In this paper we will discuss our methodology in section 
+In this paper we present a numerical simulation of the archetypical episodic WCd system WR140 with a co-moving dust model simulating grain growth and sputtering through gas-grain collisions.
+This simulation covers a temporal slice of the orbit of WR140 from phase $\Phi = 0.95$ to $\Phi = 1.10$, or the period immediately prior to and after periastron passage.
+We will discuss our methodology in Section \ref{sec:paper-2-methodology}, with a particular emphasis on our dust model in Subsection \ref{sec:dust-model}.
+Afterwards we will discuss the simulation and WR140 system parameters, as well as our data collection techniques in Section \ref{sec:paper2-wr140}.
+Finally, we will discuss our results and conclude in Sections \ref{sec:p2-results} and \ref{sec:p2-conclusion}.
 
 \section{Methodology}
 \label{sec:paper-2-methodology}
-
 
 The periodic dust forming system WR140 was simulated using a fork of the Athena++ hydrodynamical code \citep{stoneAthenaAdaptiveMesh2020}, a series of modifications were implemented to simulate binary system orbits, stellar wind outflows and dust evolution.
 These simulations were conducted in 3D in a Cartesian co-ordinate system.
@@ -186,8 +228,7 @@ The code solves a Riemann problem at each cell interface to determine the time-a
 \noindent
 where $\varepsilon$ is the total specific energy ($\varepsilon = \boldsymbol{u}^2/2 + e/\rho $), $\rho$ is the gas density, $e$ is the internal energy density, $P$ is the gas pressure and $u$ is the gas velocity.
 In order to simulate radiative losses, the parameter $\dot E_\text{cool}$ is included, which is the energy loss rate per unit volume from the fluid due to gas and dust cooling.
-
-Spatial reconstruction using a piecewise linear method was performed, while the time-integration scheme is a third-order accurate, three-stage strong stability preserving Runge-Kutta\footnote{SSPRK (3,3)} method \citep{gottliebHighOrderStrong2009}.
+Spatial reconstruction using a piecewise linear method was performed, while two strong stability Runge-Kutta methods were used for numerical integration, depending on the simulation stability.
 Several passive scalars are utilised to model wind mixing and dust evolution, the scalar values are transported by the fluid, for a given scalar species $i$, the scalar is advected through the scalar through the following equation:
 
 \begin{equation}
@@ -248,6 +289,7 @@ These curves were combined based on the elemental abundances in the WC and OB wi
 To save calculation time, temperatures between $\SI{1e4}{\kelvin} < T \leq \SI{1.1e4}{\kelvin}$ are set to \SI{1e4}{\kelvin} as they are assumed to be either rapidly cooling or a part of the stellar wind outside of the WCR.
 
 \subsection{Dust model}
+\label{sec:dust-model}
 
 In order to simulate dust evolution in WR140, included in the hydrodynamical code is a passive scalar dust model that simulates dust growth through collisions between dust grains and carbon atoms, and destruction through sputtering from a hot wind.
 The dust model operates on passive scalars, and as such simulates dust that is co-moving with the stellar wind.
@@ -361,10 +403,10 @@ $h\rms{e}$ is estimated through the following conditions:
 where $x^* = \num{2.71e8} a^{2/3} (\si{\micro\metre})/T$.
 This approximation differs from the integration method by less than 8\% while being 4 orders of magnitude faster.
 Excitation due to grain-grain collisions were not modelled, due to the limitations of the passive scalar model.
-In order to calculate the change in energy due to dust cooling, we find the radiative emissivity for dust, $\Lambda\rms{d}(T,a)$, to be:
+In order to calculate the change in energy due to dust cooling, we find the radiative emissivity for dust, $\Lambda\rms{d}(T,a)$, to be
 
 \begin{equation}
-  \Lambda(T,a) = \frac{H\rms{coll} + H\rms{el}}{n\rms{H}}
+  \Lambda(T,a) = \frac{H\rms{coll} + H\rms{el}}{n\rms{H}} ,
 \end{equation}
 
 \noindent
@@ -396,21 +438,84 @@ and summated with the gas/plasma energy loss rate.
   \label{tab:p2-criticalenergy}
 \end{table}
 
-\section{WR140 and simulation parameters}
+\section{System parameters}
 \label{sec:paper2-wr140}
+
+The authors of this paper have previously simulated WCd systems in the form of a parameter space exploration, in order to discern which wind and orbital parameters influence the dust formation rates of a typical WCd system.
+%\cite my own damn work
+It was determined that the primary factors of dust formation in a WCd system were the mass loss rates, $\mdot$, and wind terminal velocities, $v^\infty$, for each star, as well as the orbital separation, $d\rms{sep}$.
+In particular, it was found that imbalances between the wind velocity was found to produce a shear effect, driving the formation of Kelvin-Helmholtz instabilities.
+Slower winds were found to be more radiative in the post-shock WCR, cooling down to temperatures adequate for dust formation, this was found to influence the dust formation rate by as much as six orders of magnitude by varying the WR wind terminal velocity by a factor of 4.
+The authors also found that increasing $d\rms{sep}$ significantly reduced the dust production rate, due to less intensive shocks as the out-flowing winds became thinner with distance.
+In the case of WCd systems with eccentric orbits, the separation distance can vary significantly, in the case of WR140 $\dsep$ varies by a factor of 18 from apastron to periastron, this is hypothesised to be the primary cause of dust production variability within episodic systems.
+As $\mdot$ does not vary significantly on the orbital timescale of these systems, this is not expected to impact the dust formation rate in episodic systems, while the wind velocity can diverge somewhat due to radiative inhibition and orbital motion, which was considered in our results.
+
+In order to understand the structure and dynamics of the CWB system we must define some important parameters.
+The wind momentum ratio, $\eta$, is defined as:
+
+\begin{equation}
+  \eta = \frac{\mdot\sob v^\infty\sob}{\mdot\swr v^\infty\swr},
+\end{equation}
+
+\noindent
+as $\eta$ decreases we find that the wind becomes more imbalanced, in the case of WR+OB CWB systems we find that the WR stars wind typically dominates the system.
+% Assuming that there is no radiative inhibition \citep{stevens_stagnation-point_1994} or radiative braking \citep{gayley_sudden_1997},
+% the distance from each star to the apex of the WCR can be estimated using $\eta$:
+% \begin{subequations}
+%   \begin{align}
+%     r\rms{WR} & = \frac{1}{1 + \eta^{1/2}} d\rms{sep}, \\
+%     r\rms{OB} & = \frac{\eta^{1/2}}{1 + \eta^{1/2}} d\rms{sep} ,
+%   \end{align}
+% \end{subequations}
+% \noindent
+% where $r\rms{WR}$ is the distance from the WR star to the WCR apex and $r\rms{OB}$ is the distance from the OB star to the WCR apex.
+Assuming that there is no radiative inhibition \citep{stevens_stagnation-point_1994} or radiative braking \citep{gayley_sudden_1997}, we can approximate the WCR to a conical region with an opening angle:
+
+\begin{equation}
+  \theta\rms{c} \simeq 2.1 \left( 1 - \frac{\eta^{2/5}}{4}\right) \eta^{-1/3} ~~~ \text{for} ~ 10^{-4} \leq \eta \leq 1 ,
+\end{equation}
+
+\noindent
+to a relatively high degree of accuracy \citep{eichler_particle_1993}.
+Another important value for determining the evolution of a CWB system is the cooling parameter, $\chi$, which is the ratio of the time taken for the shocked wind to completely cool to the time taken for the wind to escape the shock region:
+
+\begin{equation}
+  \label{eq:p2-chi}
+  \chi = \frac{t_\text{cool}}{t_\text{esc}} \approx \frac{v_{8}^4 d_{12}}{\dot{\text M}_{-7}} , 
+\end{equation}
+
+\noindent
+where $v_{8}$ is the wind terminal velocity in units of $10^8 \, \si{\centi\metre\per\second}$, $d_{12}$ is the separation distance in units of $10^{12} \, \si{\centi\metre}$ and $\mdot_{-7}$ is the wind mass loss rate in units of $10^{-7} \, \si{\solarmass\per\year}$ \citep{stevens_colliding_1992}.
+As $\chi \to 1$, the structure of the WCR becomes more influenced by radiative instabilities, and has a post-shock temperature approaching the initial wind temperature.
+If $\chi < 1$, the WCR is completely dominated by instabilities, while if $\chi \gg 1$, the system behaves adiabatically.
+If the WCR is highly radiative the post-shock compression can be significantly greater than the adiabatic limit of $\rho\rms{post-shock} = 4 \rho\rms{pre-shock}$, which as previously discussed facilitates higher rates of dust production.
+Finally, we define a maximum dust production rate from the system, $\mdot\rms{d,max}$, assuming a 100\% conversion rate of WR wind in the WCR into dust.
+The fraction of the WR wind that is passed through the WCR is given by the equation:
+
+\begin{equation}
+  f\rms{WR} = \frac{1 - \cos\left(\theta\rms{WR}\right)}{2},
+\end{equation}
+
+\noindent
+where $\theta\rms{WR}$ is the opening angle of the WR shock front ($\theta\rms{WR} \approx 2 \tan^{-1}(\eta^{1/3}) + \pi/9$).
+$\mdot\rms{d,max}$ is then calculated with the formulae:
+
+\begin{equation}
+  \mdot\rms{d,max} = \mdot\rms{WR} X\rms{C,WR} f\rms{WR},
+\end{equation}
+
+\noindent
+where $X\rms{C}$ is the carbon mass fraction in the WR star \citep{pittardCollidingStellarWinds2018}.
+
+\subsection{WR140 parameters}
 
 % Discuss importance of WR 140 system
 
 WR 140 was simulated in this paper as it is considered to be the archetypical episodic CWB system, whose infrared dust emission peaks around periastron passage.
 WR 140 deviates from WR 98a and WR 104 by having an extremely eccentric orbit, which significantly effects the cooling parameter as the orbit progresses.
 Additionally, the minimum value for $\chi$ is significantly larger than the other systems, and hence cooling would be less dominant on the dynamics of the WCR, even at periapsis.
-
-% Discuss Chi and Eta
-
 Though these simulations do not calculate wind acceleration due to radiative line driving, both stellar winds are expected to be accelerated close to their terminal wind velocities \citep{lamersIntroductionStellarWinds1999}.
 However, this discrepancy should be noted when considering the results of this paper.
-
-\subsection{System parameters}
 
 % Discuss simulation parameters
 Recent improved estimations of the orbital parameters of WR140 by \cite{thomasOrbitStellarMasses2021} were used to calculate the orbital path for these simulations, while the mass loss rate, $\dot{\text{M}}$, and the wind terminal velocity, $v^\infty$, were derived from \cite{williamsMultifrequencyVariationsWolfrayet1990}
@@ -463,15 +568,17 @@ The system orbit was calculated using a Keplerian orbital model with the two sta
 
 % Discuss more simulation parameters
 
-A domain of $128 \times 128 \times 16 \, \si{\au}$ was used for this simulation, with a coarse simulation resolution of $400\times 400 \times 50$ in the XYZ domain.
+A domain of $128 \times 128 \times 16 \, \si{\au}$ was used for this simulation, with a coarse (0\ts{th} level) simulation resolution of $400\times 400 \times 50$ in the XYZ domain.
+The simulation has 4 refinement levels, corresponding to an effective resolution of $6400 \times 6400 \times 800$ cells and a cell size of $0.02^3 \, \si{\au}$.
+At periastron passage this results in a spacing of $\sim 80$ cells between the stars, which was found to be enough to adequately resolve the WCR. 
 This simulation has an XY to Z aspect ratio of 8:1 in order to reduce processing time, as the bulk of dust formation was expected to occur a short distance from the WCR.
 Due to computing limitations, a complete orbit could not be completed without AMR, instead, a section of the systems orbit, corresponding to an orbital phase of $0.95 \leq \Phi \leq 1.10$ was simulated, where $\Phi$ is the orbital phase.
 This section represents the period prior to periastron passage, as well as a brief period after periastron
 (Fig. \ref{fig:p2-trajectory}).
 This represents a period of approximately \num{1.2} years of the systems orbit, and the period where much of the dust forms \citep{crowther_dust_2003}.
 Fig. \ref{fig:p2-orbitalpath} shows the orbital path overlaid onto the statically refined numerical grid, the area of maximum refinement is around the orbital paths of the stars from $0.94 \leq \Phi \leq 1.11$, in order to ensure that the stars are maximally refined.
-If the stars leave the maximally refined region of the simulation unphysical behaviour with regards to wind mapping and dust formation occur, as such the simulation is halted when $\Phi = 1.10$.
-The simulation was run with two different numerical integrators, a 3\ts{rd} order accurate Runge-Kutta integrator (\texttt{rk3}) and a 4\ts{th} order accurate, 5-stage, 3 storage register strong stability preserving Runge-Kutta integrator (\texttt{ssprk5\_4})
+If the stars leave the regions that are refined to either the 3\ts{rd} or 4\ts{th} level unphysical behaviour with regards to wind mapping and dust formation occur, as such the simulation is halted when $\Phi = 1.10$.
+The simulation was run with two different numerical integrators, a 3\ts{rd} order accurate Runge-Kutta integrator, \texttt{rk3}, and a 4\ts{th} order accurate, 5-stage, 3 storage register strong stability preserving Runge-Kutta integrator, \texttt{ssprk5\_4}
 \citep{ruuthHighOrderStrongStabilityPreservingRungeKutta2005}.
 The \texttt{ssprk5\_4} integrator was found to be approximately 60\% slower, but markedly more stable.
 Prior to periastron passage the \texttt{rk3} integrator was used for its speed, but increasing numerical instability as the stars grew closer resulted in this proving untenable, and was switched to \texttt{ssprk5\_4}.
@@ -484,15 +591,15 @@ The code was compiled using the Intel \texttt{ICPC} compiler using \texttt{AVX51
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{assets/wr140-path.pdf}
-  \caption[Simulation orbital trajectories of WR140 WC7 and O5 stars]{Simulation orbital trajectories of the WC7 and O5 stars in WR140. The solid line represents the orbital phase being simulated, corresponding to $0.95 \leq \Phi \leq 1.10$. The simulation starting position for each star has been annotated.}
+  \includegraphics[width=\linewidth]{assets/trajectory/wr140-orbit.pdf}
+  \caption[Simulation orbital trajectories of WR140 WC7 and O5 stars]{Simulation orbital trajectories of the WC7 and O5 stars in WR140. The solid lines represent the orbital phase being simulated, corresponding to $0.95 \leq \Phi \leq 1.10$, while the dashed lines represent the full orbital trajectory. The starting position for each star and the orbital barycentre at (0,0) have been annotated.}
   \label{fig:p2-trajectory}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{assets/wr140-grid/grid-orbit.pdf}
-  \caption{Numerical grid of the WR140 system simulation, static mesh refinement was used to increase the resolution around the orbital path from $0.95 \leq \Phi \leq 1.10$. The orbital path of both stars are overlaid onto this numerical grid. Beyond $\Phi = 1.11$ the WR star exits the fully refined region of the simulation, causing the simulation to break down.}
+  \caption{Numerical grid of the WR140 system simulation, static mesh refinement was used to increase the resolution around the orbital path from $0.95 \leq \Phi \leq 1.10$. The orbital path of both stars are overlaid onto this numerical grid. While the stars in the system can be within cells that are not fully refined, if there is insufficient resolution the stars begin to break down. As such the stars are typically in the 3\ts{rd} or 4\ts{th} level.}
   \label{fig:p2-orbitalpath}
 \end{figure}
 
@@ -525,6 +632,7 @@ where $r$ is the distance from the barycentre.
 This threshold value was set to $\rho\rms{thres} = 1.25\rho\rms{SW}$, which was found to accurately identify the WCR through prior testing.
 
 \section{Results}
+\label{sec:p2-results}
 
 \subsection{Dust yields}
 
@@ -622,9 +730,12 @@ It should be noted that due to the small size of the simulation, the dust mass i
 \subsection{Other changes in velocity shear}
 
 \section{Conclusion}
+\label{sec:p2-conclusion}
 
 \section{Acknowledgements}
 
+This work was undertaken on ARC4, part of the High Performance Computing facilities at the University of Leeds, UK.
+We would also like to thank P. A. Crowther for his work on the Galactic Wolf-Rayet Catalogue (\url{pacrowther.staff.shef.ac.uk/WRcat}).
 
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
 
