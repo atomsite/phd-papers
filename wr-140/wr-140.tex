@@ -82,7 +82,6 @@
 \newcommand{\swr}{\ensuremath{_{\text{WR}}}}
 \newcommand{\sob}{\ensuremath{_{\text{OB}}}}
 \newcommand{\rms}[1]{\ensuremath{_{\text{#1}}}}
-
 \newcommand{\mdot}{\dot{\text{M}}}
 \newcommand{\dsep}{d\rms{sep}}
 
@@ -231,7 +230,7 @@ In order to simulate radiative losses, the parameter $dE_\text{cool}/dt$ is incl
 
 Spatial reconstruction using a piecewise linear method was performed, while two strong stability Runge-Kutta methods were used for numerical integration, depending on the simulation stability.
 Several passive scalars are utilised to model wind mixing and dust evolution, the scalar values are transported by the fluid.
-For a given scalar species $i$, the scalar is advected through the scalar through the following equation:
+For a given scalar, $i$, the scalar is advected through the simulation through the following equation:
 
 \begin{equation}
   \rho \frac{dC_i}{dt} = \frac{\partial}{\partial t} \left( \rho C_i \right) + \nabla \cdot \left( C_i \rho \mathbf{u} \right) = -\nabla \cdot \mathbf{Q}_i ,  
@@ -569,7 +568,7 @@ The system orbit was calculated using a Keplerian orbital model with the two sta
   $X\rms O   $ & $0.010$ & $0.050$ \\
   \hline
   \end{tabular}
-  \caption[Abundances by mass used for OB and WR stars]{Abundances used for the OB and WR stars being simulated. Other elements are assumed trace when calculating dust emission \citep{williamsSpectraWC9Stars2015}.}
+  \caption[Abundances by mass used for OB and WR stars]{Abundances used for the OB and WR stars being simulated. Other elements are assumed to be trace when calculating dust emission \citep{williamsSpectraWC9Stars2015}.}
   \label{tab:p2-abundances}
 \end{table}
 
