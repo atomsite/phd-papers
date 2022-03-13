@@ -325,7 +325,7 @@ where $\xi$ is the grain sticking factor, $\rho\rms{C}$ is the carbon density ($
 The rate of change in grain mass due to accretion, $dm\rms{gr,ac}/dt$, is calculated with the formulae:
 
 \begin{equation}
-  \frac{d m\rms{gr,ac}}{dt} = 4 \pi \rho\rms{gr} a^2 \frac{da}{dt} = \pi \xi \rho\rms{C} w\rms{C} a^2, \\
+  \frac{d m\rms{gr,acc}}{dt} = 4 \pi \rho\rms{gr} a^2 \frac{da}{dt} = \pi \xi \rho\rms{C} w\rms{C} a^2, \\
 \end{equation}
 
 \noindent
@@ -343,7 +343,7 @@ This value is based on an average lifetime of carbon grains in an interstellar s
 The rate of change in the dust grain mass due to sputtering, $dm\rms{gr,sp}/dt$, can then be calculated with a similar formulae to the rate of change in grain mass due to accretion:
 
 \begin{equation}
-  \frac{dm\rms{gr,sp}}{dt} = 4\pi \rho\rms{gr} a^2 \frac{da}{dt} = - 4 \pi \tau\rms{gr} n\rms{g} a^2.
+  \frac{d m\rms{gr,sp}}{dt} = -4 \pi \frac{\rho\rms{gr} a^3}{\tau\rms{d}} = -4\pi \frac{\rho\rms{gr} n\rms{g} a^2}{\num{3e6}}
 \end{equation}
 
 \noindent

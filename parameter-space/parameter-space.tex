@@ -97,13 +97,15 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[Dust formation simulations in WCd systems]{An exploration of dust formation within WCd systems using an advected scalar dust model}
+\title[Dust growth simulations in WCd systems]{An exploration of dust grain growth within WCd systems using an advected scalar dust model}
 
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
-\author[J. W. Eatson et al.]{
-J. W. Eatson\thanks{E-mail: \href{mailto:py13je@leeds.ac.uk}{py13je@leeds.ac.uk}} \&
+\author[J. W. Eatson, J. M. Pittard \& S. Van Loo]{
+J. W. Eatson\thanks{E-mail: \href{mailto:py13je@leeds.ac.uk}{py13je@leeds.ac.uk}},
 J. M. Pittard
+and
+S. Van Loo
 \\
 School of Physics and Astronomy, University of
        Leeds, Woodhouse Lane, Leeds LS2 9JT, UK\\  
@@ -156,7 +158,7 @@ Binary systems with colliding stellar winds are a fascinating type of system, ca
 The shocks produced from this wind interaction creates some of the most luminous persistent stellar-mass x-ray sources in the night sky \citep{rossloweSpatialDistributionGalactic2015}.
 Within the wind collision region the available mechanical energy can exceed $10^4 \, \si{\solarluminosity}$, producing shocks with temperatures up to $10^8$ \si{\kelvin}.
 
-In particularly energetic colliding wind binary (CWB) systems with a Wolf-Rayet (WR) star as the main producer of the stellar wind, dust in the form of amorphous carbon grains has been observed to form \citep{allenInfraredPhotometryNorthern1972}.
+In particularly energetic colliding wind binary (CWB) systems with a Wolf-Rayet (WR) star and OB-type partner, dust in the form of amorphous carbon grains has been observed to form \citep{allenInfraredPhotometryNorthern1972}.
 This is particularly curious, as the high wind temperatures, strong shocks and UV luminosities of these systems would result in dust grains being rapidly destroyed through sublimation processes.
 These dust forming CWB systems have only been observed to occur if a carbon phase WR star (WC star) is partnered with either another WR star or an OB main sequence star (a WR+OB system).
 While the exact methods of dust formation and evolution in these systems are poorly understood, dust formation rates have been observed to be extremely high, up to $10^{-6} \, \si{\solarmass\per\year}$.
@@ -249,19 +251,19 @@ Finally we discuss our results and conclude in Sections \ref{sec:p1-results} and
 \section{Methodology}
 \label{sec:methodology}
 
-Numerical simulations within this paper utilise the Athena++ hydrodynamical code, a highly modular modern fluid dynamics code \citep{stoneAthenaAdaptiveMesh2020}.
+Numerical simulations within this paper utilise the Athena++ hydrodynamical code, a highly modular fluid dynamics code \citep{stoneAthenaAdaptiveMesh2020}.
 Simulations are generated in 3D and the Euler hydrodynamical equations are solved in the form:
 
 \begin{subequations}
   \begin{align}
     \frac{\partial\rho}{\partial t} & + \nabla \cdot \left(\rho \boldsymbol{u}\right) = 0 , \\
     \frac{\partial \rho \boldsymbol{u}}{\partial t} & + \nabla \cdot \left(\rho \boldsymbol{u} u + P \right) = 0, \\
-    \frac{\partial \rho \varepsilon}{\partial t} & + \nabla \cdot \left[ \boldsymbol{u} \left( \rho\varepsilon + P \right) \right] = \dot E\rms{cool} , 
+    \frac{\partial \rho \varepsilon}{\partial t} & + \nabla \cdot \left[ \boldsymbol{u} \left( \rho\varepsilon + P \right) \right] = \frac{d E\rms{cool}}{dt} , 
   \end{align}
 \end{subequations}
 
 \noindent
-where $\varepsilon$ is the total specific energy ($\varepsilon = \boldsymbol{u}^2/2 + e/\rho $), $\rho$ is the gas density, $e$ is the internal energy density, $P$ is the gas pressure, $\boldsymbol{u}$ is the gas velocity and $\dot E\rms{cool}$ is the energy loss rate per unit volume from the fluid due to gas and dust cooling.
+where $\varepsilon$ is the total specific energy ($\varepsilon = \boldsymbol{u}^2/2 + e/\rho $), $\rho$ is the gas density, $e$ is the internal energy density, $P$ is the gas pressure, $\boldsymbol{u}$ is the gas velocity and $dE\rms{cool}/dt$ is the energy loss rate per unit volume from the fluid due to gas and dust cooling.
 % which is elaborated on in section \ref{sec:gas-dust-cooling}.
 
 % Technical details
@@ -277,6 +279,7 @@ This meshblock system is also utilised in mesh refinement for increasing the eff
 As the CWB systems are being simulated in their entirety, a very large volume needs to be simulated, while at the same time the region between the stars must be resolved with a resolution of at least 100 cells in order to adequately resolve the WCR.
 This difference in length scales necessitates the use of static mesh refinement (SMR) to improve the effective resolution of the simulation.
 A base coarse resolution of $320 \times 320 \times 40$ cells in $XYZ$ is defined for the simulations, while a region close to the stars operates at a higher refinement level.
+This rectangular region encompasses the entire orbital path of the stars and is refined to the maximum level.
 This results in a resolution increase of a factor of $2^{n-1}$ greater than the coarse resolution, where $n$ is the refinement level (see Fig. \ref{fig:smr-grid}).
 In the case of 7 levels (inclusive of the base, ``coarsest'' level) as used in most of the simulations in this paper, this results in an effective resolution of $20480 \times 20480 \times 2560$ cells.
 SMR is utilised instead of Adaptive Mesh Refinement, a more flexible conditional method, as it has proven to be more reliable for our simulations.
@@ -285,12 +288,12 @@ As much of the grain evolution occurs a small distance from the WCR stagnation p
 \begin{figure}
   \centering
   \includegraphics[width=2.5in]{assets/mesh/gridxy.pdf}
-  \caption[Static mesh refinement example]{A plot of the blocks used in a 7 level simulation with a block size of $32\times 32 \times 8$ cells. The block density increases dramatically closer to the barycentre. The coarse simulation resolution is $(320\times 320\times 40)$ cells with a block size of $(32\times32\times8)$ cells. The diagram is sliced about the $z$ axis at $z=0$.}
+  \caption[Static mesh refinement example]{A plot of the blocks used in a 7 level simulation with a block size of $32\times 32 \times 8$ cells. The block density increases dramatically closer to the barycentre. The coarse simulation resolution is $(320\times 320\times 40)$ cells with a block size of $(32\times32\times8)$ cells. The diagram is sliced about the $z$ axis at $z=0$. This grid is not symmetric, due to rounding when building the meshblocks and the refinement region not being being an integer factor of the volume of a meshblock. This does not influence the results of the simulation.}
   \label{fig:smr-grid}
 \end{figure}
 
 The wind outflow from each star is simulated by replacing the conserved variables (density, momentum and energy) within a small region around the expected position of the stars; this region is typically on the order of 6 maximally refined cells in radius.
-This rewrite corresponds to a change in density, $\rho \rms R$, pressure, $P \rms R$, and mechanical energy, $E \rms R$, imparted by an outflowing wind, such that
+This rewrite corresponds to a change in density, $\rho \rms R$, pressure, $P \rms R$, and mechanical energy, $E \rms R$, imparted by an outflowing wind, such that:
 
 \begin{subequations}
   \begin{align}
@@ -424,7 +427,7 @@ where $E_0$ is the initial energy required to overcome the grain's potential and
 \end{figure}
 
 Electron-grain collisional heating, $H_\text{el}$, is modelled using the same calculation for $H_\text{coll}$, albeit with some differences.
-One major factor for accurately calculating the energy loss due to electron collisions is that the electron number density, $n\rms e$, needs to be correct.
+For accurately calculating the energy loss due to electron collisions, the electron number density, $n\rms{e}$, needs to be known.
 This is achieved with a second series of lookup tables that contain the electron-to-ion ratio of each wind across a temperature range of $10^4$ to $10^9\,\si{\kelvin}$ (Fig. \ref{fig:electron-curve}).
 The electron number density is $n \rms e = \beta n \rms i$, where $\beta$ is the electron-to-ion ratio and $n \rms i$ is the ion number density.
 Another difference between calculating electron-grain and gas-grain cooling is calculating electron-grain transparency, which is a significantly more complex problem than calculating ion-grain transparency.
@@ -441,7 +444,7 @@ Electron-grain transparency is therefore calculated via an approximation describ
 
 \noindent
 where $x^* = \num{2.71e8} a^{2/3} (\si{\micro\metre})/T$.
-This approximation is approximately 4 orders of magnitude faster than using an integration method, while differing by less than 8\% (Fig. \ref{fig:lambdacomparison}).
+This approximation is approximately 4 orders of magnitude faster than using an integration method, while differing by less than 8\%.
 Grain-grain collisions are not modelled, as this would be difficult to calculate due to the single-fluid model in use.
 Further simulations utilising a multi-fluid model could allow for this to be simulated.
 Finally, in order to calculate the change in energy due to dust cooling, the rate of energy change, $dE/dt$, is calculated using the formulae:
@@ -465,12 +468,12 @@ The total energy loss rate per unit volume due to gas and dust cooling is given 
 	\frac{dE}{dt} = \left( \frac{\rho}{m_\text{H}} \right)^2 \Lambda_\text{w}(T) + n_\text{T} n_\text{d} \Lambda_\text{d} (T,a) .
 \end{equation}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{assets/grain-transparency/lambda-comp.pdf}
-  \caption[Comparison of electron transparency methods.]{Dust grain cooling curves, $\Lambda_\text{d}(T,a)$, as a function of temperature for various grain sizes. The estimate method (Eq. \ref{eq:transparency-approximation}, dashed line) is extremely close to the integral value (solid line) aside from at the highest temperatures.}
-  \label{fig:lambdacomparison}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=\linewidth]{assets/grain-transparency/lambda-comp.pdf}
+%   \caption[Comparison of electron transparency methods.]{Dust grain cooling curves, $\Lambda_\text{d}(T,a)$, as a function of temperature for various grain sizes. The estimate method (Eq. \ref{eq:transparency-approximation}, dashed line) is extremely close to the integral value (solid line) aside from at the highest temperatures.}
+%   \label{fig:lambdacomparison}
+% \end{figure}
 
 \subsection{Numerical modelling of dust through advected scalars}
 
@@ -478,7 +481,7 @@ The most important modification to Athena++ was the addition of a dust growth an
 A series of passive scalars were used where the dust parameters described by the scalars can evolve and advect through the simulation, analogous to a co-moving fluid, which previous papers have noted is an accurate dynamical model for dust within the WCR \citep{hendrix_pinwheels_2016}.
 In these simulations, information about the dust is stored in the form of two variables, the average grain radius, $a$, and the dust-to-gas mass ratio, $z$.
 From these constants the dust production rate, number density, and total dust mass can be derived.
-A co-moving model allows for a simplified model of dust formation. In such a model, the mean particle velocity between two particles of different size is:
+A co-moving model allows for a simplified model of dust formation. In such a model, the mean relative velocity between the dust and gas is given by:
 
 \begin{equation}
   \langle u \rangle = \sqrt{\frac{8kT}{\pi m \rms r}} ,
@@ -490,6 +493,9 @@ where $m \rms r$ is the familiar reduced mass between a test particle of mass $m
 \noindent
 As the dust grain is significantly more massive, the reduced mass is approximately equal to the grain mass, simplifying the dynamics of the simulation in a co-moving case.
 
+In this model, growth and destruction occur in distinct temperature regimes.
+Dust growth occurs when $T \leq \SI{1.4e4}{\kelvin}$ whilst dust destruction occurs at temperatures of $T \geq 10^6 \, \si{\kelvin}$.
+
 Dust growth is modelled through approximating growth due to grain-gas accretion where grains co-moving with a gas perform relatively low-velocity collisions with the surrounding gas, causing it to accrete onto the surface of the dust grain 
 \citep{spitzer_jr._physical_2008}.
 Assuming a single average grain size the rate of change in the average grain radius is given by:
@@ -499,7 +505,7 @@ Assuming a single average grain size the rate of change in the average grain rad
 \end{equation}
 
 \noindent
-where $w\rms{C}$ is the Maxwell-Boltzmann distribution RMS velocity for carbon ($w\rms{C} = \sqrt{3 k\rms{B} T/12 m\rms{H}}$), $\xi$ is the grain sticking efficiency, $\rho\rms{C}$ is the carbon density in the gas and $\rho_\text{gr}$ is the grain bulk density.
+where $w\rms{C}$ is the Maxwell-Boltzmann distribution RMS velocity for carbon ($w\rms{C} = \sqrt{3 k\rms{B} T/12 m\rms{H}}$), $\xi$ is the grain sticking efficiency, $\rho\rms{C}$ is the carbon density in the gas ($\rho\rms{C} = X(C)\rho\rms{g}$, where $X(C)$ is the wind carbon abundance), and $\rho_\text{gr}$ is the grain bulk density.
 The associated rate of dust density change, $d\rho\rms{d}/dt$ is calculated with the formulae:
 
 % \begin{equation}
@@ -516,27 +522,32 @@ The associated rate of dust density change, $d\rho\rms{d}/dt$ is calculated with
 
 \noindent
 where $n_\text{d}$ is the grain number density and $dm\rms{gr}/dt$ is the rate of change of the grain mass.
-In this paper we take $\xi = 0.1$ as a conservative value, though this value can rise to as high as $1$ in the case of highly charged grains.
+In this paper we take $\xi = 0.1$ as a conservative value, though this value can rise to as high as $1$ in the case of highly charged grains \citep{spitzer_jr._physical_2008}.
 A bulk density analogous to amorphous carbon grains ($\rho\rms{gr} = \SI{3.0}{\gram\per\centi\metre\cubed}$) is used.
 
 Dust destruction gas-grain sputtering is calculated using the \cite{drainePhysicsDustGrains1979} prescription.
 A dust grain has a lifetime which is dependent on the number density of the gas the grain is moving through, $n\rms{g}$.
 In the case of amorphous carbon grains, the dust lifetime is:
 
-\begin{equation}
-  \tau\rms{d} = \frac{a}{\dot{a}} \approx \num{3e6} \frac{a}{n\rms{g}} \, \si{\year},
-\end{equation}
+\begin{subequations}
+  \begin{align}
+    \tau\rms{d} & \approx \num{3e6} \frac{a}{n\rms{g}} \, \si{\year}, \\
+    \frac{da}{dt} & = \frac{a}{\tau\rms{d}} ,
+  \end{align}
+  
+\end{subequations}
 
 \noindent
 where $a$ is in microns.
 This value is based on an average lifetime of carbon grains in interstellar shocks at shock temperatures between $10^6$ and $\SI{3e8}{\kelvin}$ \citep{tielens_physics_1994,dwekCoolingSputteringInfrared1996}.
 % Assuming a spherical grain, the rate of change in mass and radius can be calculated as:
 % The rate of change in grain radius, $da/dt$, and grain mass, $dm\rms{gr}/dt$, as well as the overall dust mass, $m\rms{d}$, and dust density, $\rho\rms{d}/dt$ can be calculated with the formulae:
-The rate of change in grain mass can then be calculated with the formulae:
+The rate of change in grain mass and dust density can then be calculated with the formulae:
 
 \begin{subequations}
   \begin{align}
-    \frac{d m\rms{gr}}{dt}   & = - 4 \pi \tau\rms{d} \rho\rms{gr} n\rms{g} a^2 , \\
+    \frac{d m\rms{gr}}{dt} & = - 4 \pi \rho\rms{gr} a^2 \frac{da}{dt} , \\
+    \frac{d m\rms{gr}}{dt}   & = -4 \pi \frac{\rho\rms{gr} a^3}{\tau\rms{d}} = -4\pi \frac{\rho\rms{gr} n\rms{g} a^2}{\num{3e6}} ,\\
     \frac{d \rho\rms{d}}{dt} & = \frac{d m\rms{gr}}{dt} n\rms{d}.
   \end{align}
 \end{subequations}
@@ -544,7 +555,7 @@ The rate of change in grain mass can then be calculated with the formulae:
 \noindent
 % where $n \rms{g}$ is the gas number density.
 Application of the dust growth and destruction routines in the code is determined by the gas temperature of a cell.
-Dust growth occurs when $T \leq \SI{1.4e4}{\kelvin}$ whilst dust destruction occurs at temperatures of $T \geq 10^6 \, \si{\kelvin}$.
+
 
 % //TODO cleanup sentence structures
 In order to propagate dust through each simulation, a small initial value for the advected scalars is set in each cell in the remap zones.
@@ -727,10 +738,9 @@ Similarly to the previous set of simulations, a minimum of 1 orbit was needed fo
 
 \subsection{Data collection}
 
-HDF5 files were generated at regular time intervals - 3D HDF5 meshes were generated every $1/100$\ts{th} of an orbit, while 2D slices were produced every $1/1000$\ts{th} of an orbit.
-These HDF5 files contain the primitive variables of the simulation: gas density, $\rho$, gas pressure, $P$, and wind velocity components, $v_x$, $v_y$ and $v_z$.
+HDF5 files were generated at regular time intervals containing the primitive variables of the simulation: gas density, $\rho$, gas pressure, $P$, and wind velocity components, $v_x$, $v_y$ and $v_z$.
 These variables were then used to derive other variables such as temperature and energy.
-The scalars governing the dust properties were also stored for each cell: the dust-to-gas mass ratio, $z$, and the dust grain radius, $a$.
+The scalars containing the dust-to-gas mass ratio, $z$, is also included.
 The wind ``colour'', the proportion of gas from each star, was also tracked.
 A value of 1.0 indicates a pure WR wind while 0.0 indicates a pure OB wind.
 
@@ -780,16 +790,16 @@ Figure \ref{fig:postshockcoolcomparison} shows that at the temperatures present 
 \end{figure}
 
 In the case of the \texttt{fullcool} simulation, a peak dust formation rate of $\SI{7e-09}{\solarmass\per\year}$ was calculated.
-This fluctuation appears to be due to dust forming mostly in high density instabilities (see Fig. \ref{fig:coolingprocess-density}).
+This fluctuation appears to be due to dust forming mostly in high density clumps (see Fig. \ref{fig:coolingprocess-density}).
 The average dust formation rate from these simulations is noted in Table \ref{tab:radiative-average-rates}.
 The observed rates are less than 0.1\% of the theoretical maximum given by Eq. \ref{eq:maxdust}, which indicates that the average dust-to-gas ratio, $z$, in the WCR, does not exceed $10^{-3}$.
 
-\begin{figure}
+\begin{figure*}
   \centering
-  \includegraphics[width=\linewidth]{assets/results/radiative/radiative-rho.pdf}
+  \includegraphics{assets/results/radiative/radiative-rho.pdf}
   \caption[Instabilities due to cooling]{Density comparison in the orbital plane for the \texttt{nocool} and \texttt{fullcool} models. With cooling enabled instabilities are far more prevalent, with pockets of very high density material within the WCR.}
   \label{fig:coolingprocess-density}
-\end{figure}
+\end{figure*}
 
 % //TODO plot showing simulation a t 1.0, 2.0 and 3.0 phase, showing difference in dust formation
 
@@ -798,9 +808,9 @@ The observed rates are less than 0.1\% of the theoretical maximum given by Eq. \
 As cooling is significant in the post-shock WR wind ($\chi_\text{WR} = 1.2$), further compression occurs, resulting in much higher post-shock densities (Fig. \ref{fig:postshockcompression}).
 % Gas rapidly cools within this post-shock region, corresponding to where energy losses were stated to be important in \cite{usov_stellar_1991};
 This rapid cooling results in ideal conditions for dust formation, especially within high density instabilities.
-A similar effect for the OB wind is not observed, as radiative energy losses are not influential on the dynamics of the flow, due to the faster, significantly thinner stellar wind ($\chi_\text{OB} = 1915$).
+A similar effect for the OB wind is not observed, as radiative energy losses are not influential on the dynamics of the flow, due to the faster, significantly less dense stellar wind ($\chi_\text{OB} = 1915$).
 Fig. \ref{fig:postshocktemperature} shows that the \texttt{fullcool} simulation has a similar immediate-post shock temperature to an adiabatic model, but the shocked WR wind cools to the floor temperature within an extremely short timescale, allowing the nascent dust grains to grow.
-We also observe that simulations with wind have a markedly more mixed wind, due to thermal instabilities in the post-shock environment (Fig. \ref{fig:radiative-windmixing}).
+We also observe that simulations with wind have a markedly more mixed wind, due to instabilities in the post-shock environment (Fig. \ref{fig:radiative-windmixing}).
 Fig. \ref{fig:full-radiative-z} shows that dust clumps form shortly after the initial wind collision.
 These clumps rapidly convert post-shock gas to dust.
 However, rapid dust production tapers off as the post-shock flow becomes more diffuse.
@@ -1078,13 +1088,23 @@ Our results are consistent with observations of episodic dust forming systems, w
 \end{table}
 
 
-\section{Conclusions}
+\section{Summary \& Conclusion}
 \label{sec:p1-conclusion}
 
+Through these simulations we have determined a series of tendencies regarding the change in dust yield for systems with differing wind and orbital parameters.
 % Dust formation appears to be extremely sensitive to initial conditions, particularly terminal velocity
 The simulations in this paper were conducted over a fairly limited parameter space of mass loss rates and wind terminal velocities.
 Despite this, the dust production rate varied by up to 6 orders of magnitude.
 Dust formation was found to be extremely sensitive to the wind properties of both stars, which imposes a limited range of wind parameters for dust to form efficiently.
+As the wind mass loss rates change, we find that dust production occurs if either star has a greater mass loss rate.
+The system appears to undergo more cooling.
+This change could be attributed to the increased number density of dust grains in the WC wind in the case of simulation \texttt{mdot-1}.
+However, we find that a similar effect occurs when increasing the mass loss rate of the OB star, which does not inject dust into the simulation.
+If the wind \emph{velocities} are more imbalanced we find that dust production rate increases significantly as well.
+This is most likely due to the presence of KH instabilities from an increased wind shear.
+Dust production is also affected by orbital properties, as the separation distance increases, we find a corresponding drop in 
+due to the reduction in instabilities generating high-density clumps, as well as the reduced shock intensity as the winds become more diffuse with distance.
+
 This would explain why these dust forming systems are comparatively rare, compared to the total number of systems with massive binary stars and interacting winds, and also why periodic dust forming systems have eccentric orbits.
 % Dust formation rate also varies in accordance with the separation distance, but is somewhat less sensitive to change.
 % This would present itself periodic WCd systems, as WC stars do not undergo significant variability of their wind properties over the systems orbital timescale.
@@ -1097,6 +1117,21 @@ The baseline system, which is representative of WR98a, has a significantly lower
 Future simulations will focus on these other systems
 % as an exploration of more varied conditions would be conducive to demonstrating the veracity of this dust model.
 to explore how closely they match observations.
+The production of dust in high density clumped regions could also explain the formation of dust in single WR/OB systems, which can form dust in significantly lower quantities.
+
+Furthermore, we note that the dust production rate of the \texttt{baseline} simulation is somewhat lower than the predicted dust production rate of WR98a.
+A predicted value of approximately \SI{6e-7}{\solarmass\per\year} was calculated for WR98a \citep{lauRevisitingImpactDust2020}.
+This discrepancy is due to a variety of factors:
+
+\begin{itemize}
+  \item Slightly different mass loss rates and wind terminal velocities of the system and the simulation. The estimated value of $v^\infty\rms{WR}$ in WR98a is 90\% of the simulation value, and as such would correspond to a significant increase in production rate based on our results.
+  \item Incompleteness of the grain growth model and a lack of other growth mechanisms, such as initial growth due to impinging carbon ions.
+  \item An incorrect value for the grain sticking factor, which was extremely conservative and could underestimate dust growth by a significant amount.
+\end{itemize}
+
+\noindent
+Whilst this is the case, a qualitative analysis of which wind and orbital parameters significantly impact formation rates has been performed.
+A more in-depth analysis of WCd systems using an improved version of this model would allow us to make quantitative analyses of dust formation rate.
 
 \subsection{Wind mixing within the WCR}
 
@@ -1110,7 +1145,7 @@ Additionally, a multi-fluid model could be used to model the dynamics of grains,
 % Improvements to model, multi-wind model, astrochemical model? Extremely large bounds for future work
 % Mention single wind WC grain formation
 
-\section{Summary}
+\subsection{Summary}
 
 Our parameter space exploration of colliding wind binary systems undergoing dust formation yields new insights into how dust forms within the WCR.
 Dust production within these systems is poorly understood, and with direct observations of the WCR rendered difficult by the extreme conditions of these systems, it falls on numerical simulation to elucidate the nature of dust production in CWBs.
