@@ -529,25 +529,25 @@ Dust destruction gas-grain sputtering is calculated using the \cite{drainePhysic
 A dust grain has a lifetime which is dependent on the number density of the gas the grain is moving through, $n\rms{g}$.
 In the case of amorphous carbon grains, the dust lifetime is:
 
-\begin{subequations}
-  \begin{align}
-    \tau\rms{d} & \approx \num{3e6} \frac{a}{n\rms{g}} \, \si{\year}, \\
-    \frac{da}{dt} & = \frac{a}{\tau\rms{d}} ,
-  \end{align}
-  
-\end{subequations}
+\begin{equation}
+  \tau\rms{gr} = \frac{a}{da/dt} \approx \SI{3e6}{\year} \cdot \frac{a (\si{\micro\metre})}{n\rms{g}} \equiv \num{9.467e17} \cdot \frac{a}{n\rms{g}} .
+\end{equation}
 
 \noindent
-where $a$ is in microns.
 This value is based on an average lifetime of carbon grains in interstellar shocks at shock temperatures between $10^6$ and $\SI{3e8}{\kelvin}$ \citep{tielens_physics_1994,dwekCoolingSputteringInfrared1996}.
+The rate of change in grain radius can be calculated with the formula
+
+\begin{equation}
+  \frac{da}{dt} = \frac{a}{\tau\rms{gr}} = \num{1.056e-18} \cdot n\rms{g},
+\end{equation}
+
 % Assuming a spherical grain, the rate of change in mass and radius can be calculated as:
 % The rate of change in grain radius, $da/dt$, and grain mass, $dm\rms{gr}/dt$, as well as the overall dust mass, $m\rms{d}$, and dust density, $\rho\rms{d}/dt$ can be calculated with the formulae:
 The rate of change in grain mass and dust density can then be calculated with the formulae:
 
 \begin{subequations}
   \begin{align}
-    \frac{d m\rms{gr}}{dt} & = - 4 \pi \rho\rms{gr} a^2 \frac{da}{dt} , \\
-    \frac{d m\rms{gr}}{dt}   & = -4 \pi \frac{\rho\rms{gr} a^3}{\tau\rms{d}} = -4\pi \frac{\rho\rms{gr} n\rms{g} a^2}{\num{3e6}} ,\\
+    \frac{d m\rms{gr}}{dt} & = -4 \pi \rho\rms{gr} a^2 \frac{da}{dt} = \num{-1.33e-17} \cdot n\rms{g} \rho\rms{gr} a^2 , \\
     \frac{d \rho\rms{d}}{dt} & = \frac{d m\rms{gr}}{dt} n\rms{d}.
   \end{align}
 \end{subequations}

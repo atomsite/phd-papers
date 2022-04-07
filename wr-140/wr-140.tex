@@ -357,15 +357,22 @@ Dust destruction through gas-grain sputtering is calculated using the \cite{drai
 Within a flow of gas number density $n\rms{g}$ a dust grain of radius $a$ has a grain lifespan, $\tau\rms{gr}$ of:
 
 \begin{equation}
-  \tau\rms{gr} = \frac{a}{\dot{a}} \approx \num{3e6} \frac{a}{n\rms{g}} \, \si{\year} .
+  \tau\rms{gr} = \frac{a}{da/dt} \approx \SI{3e6}{\year} \cdot \frac{a (\si{\micro\metre})}{n\rms{g}} \equiv \num{9.467e17} \cdot \frac{a}{n\rms{g}} .
 \end{equation}
 
 \noindent
 This value is based on an average lifetime of carbon grains in an interstellar shock with a temperature of $\SI{1e6}{\kelvin} \leq T \leq \SI{3e8}{\kelvin}$ \citep{tielens_physics_1994,dwekCoolingSputteringInfrared1996}.
+From this we find a rate of change in the grain radius such that:
+
+\begin{equation}
+  \frac{da}{dt} = \num{1.056e-18} \cdot n\rms{g}. 
+\end{equation}
+
+\noindent
 The rate of change in the mass of a single dust grain due to sputtering, $dm\rms{gr,sp}/dt$, can then be calculated with a similar formula to the rate of change in grain mass due to accretion:
 
 \begin{equation}
-  \frac{d m\rms{gr,sp}}{dt} = -4 \pi \frac{\rho\rms{gr} a^3}{\tau\rms{d}} = -4\pi \frac{\rho\rms{gr} n\rms{g} a^2}{\num{3e6}}
+  \frac{d m\rms{gr,sput}}{dt} = -4 \pi \rho\rms{gr} a^2 \frac{da}{dt} = \num{-1.33e-17} \cdot n\rms{g} \rho\rms{gr} a^2 ,
 \end{equation}
 
 \noindent
