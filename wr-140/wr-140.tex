@@ -711,6 +711,20 @@ The volume-weighted totals of all parameters of interest were also collected, su
   \label{fig:wr140-dustmass}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{assets/fluxes/magnitudes.pdf}
+  \caption[Comparison of simulation dust production rate and $L^\prime$ photometry]{A comparison of the dust production rate in our simulation of WR140 and $L^\prime$ photometry of the WR140 system at three periastron passages in 1977, 1985 and 1993 \citep{crowther_dust_2003}. Radiance from dust emission peaks shortly after $\Phi = 1.00$ in all cases, and reduces to regular levels by $\Phi \sim 1.50$. The dust production rate peaks at the same time and reduces in a similar manner. Whilst dust production is expected to reach pre-periastron levels sooner than $\Phi \sim 1.50$, this is not a direct comparison as dust can radiate long after leaving the dust production region. Conversion from observation date to orbital phase is performed with orbital parameters defined in \cite{fahedSpectroscopyArchetypeCollidingwind2011}.}
+  \label{fig:wr140-lprime}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{assets/fluxes/magnitudes-mass.pdf}
+  \caption[Comparison of simulation dust mass and $L^\prime$ photometry]{A comparison of the simulation dust mass and $L^\prime$ photometry of the WR140 system at three periastron passages in 1977, 1985 and 1993 \citep{crowther_dust_2003}. Radiance from dust emission peaks shortly after $\Phi = 1.00$ in all cases, and reduces to regular levels by $\Phi \sim 1.50$. Dust mass in the simulation reaches a maxima at the same time as dust luminosity peaks, with dust mass steadily reducing in a similar manner. The dust mass reduces to pre-periastron levels faster than the dust production rate in Fig. \ref{fig:wr140-lprime} as the dust quickly advects off of the numerical grid.}
+  \label{fig:wr140-lprime-mass}
+\end{figure}
+
 We observe that as the system approaches periastron passage, the WCR temperature decreases and the WCR on the whole becomes radiatively dominated.
 Instability appears on the leading shock prior to and during periastron passage.
 Similarly to what was observed in our previous paper, the leading shock typically has more instability, as it sweeps through the WR stellar wind.
@@ -727,8 +741,11 @@ We find peak conversion efficiency of gas into dust of $\sim 26\%$ in the WCR co
 The majority of dust production ($\gtrsim 90\%$) is produced within the WCR.
 After reaching this maximum value, the dust production rate steadily decreases as the stars recede from each other.
 Assuming this decrease in dust production rate is steady, dust production reaches a pre-periastron level of $\sim 10^{-11} \, \si{\solarmass\per\year}$ by $\Phi \lesssim 1.15$, giving us an active dust production period of $\lesssim 1.2 \, \si{\year}$.
-This is consistent with $L^\prime$ photometry of WR140 (see \cite{crowther_dust_2003}, Fig. 2) -- which sharply decreases over the first year -- and suggests our model can qualitatively assess dust production rates of episodic WCd systems.
-This is reflected in the overall dust mass of the simulation (Fig. \ref{fig:wr140-dustmass}), as well as in infrared observations of WR140, where the infrared emission from dust formation rapidly reaches a maximum value after periastron passage, and slowly relaxes to a minimum value. % Find citation for this, plot
+This is consistent with $L^\prime$ photometry of WR140 (see \cite{crowther_dust_2003}; Fig. 2) -- which sharply decreases over the first year -- and suggests our model can qualitatively assess dust production rates of episodic WCd systems.
+This is reflected in the overall dust mass of the simulation (Fig. \ref{fig:wr140-dustmass}), as well as in infrared observations of WR140, where the infrared emission due to dust rapidly reaches a maximum value after periastron passage, and slowly relaxes to a minimum value.
+Fig. \ref{fig:wr140-lprime} compares the dust production rate in the simulation and available $L^\prime$ photometry of WR140, we observe that the the dust production rate of the simulation drops in a similar manner to the drop in dust emission in the system after periastron passage.
+Whilst the rate of decay of dust production rate is much faster than the rate of decay of $L^\prime$ luminance, this is not a direct comparison, dust is still capable of emitting after leaving the region of the WCR where dust growth occurs most intensely.
+Fig. \ref{fig:wr140-lprime-mass} shows a similar result, though the dust mass reduces significantly faster as the dust rapidly traverses through the simulation and off and out of the numerical domain.
 This asymmetry in the time-dependent change in infrared luminosity implies the existence of several factors for suppression and encouragement of dust formation than just the change in orbital separation distance.
 It should be noted that due to the small size of the simulation, the dust mass in the system will reduce quickly, as dust advects off the numerical grid.
 
