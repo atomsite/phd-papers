@@ -230,13 +230,13 @@ The code solves a Riemann problem at each cell interface to determine the time-a
   \begin{align}
     \frac{\partial\rho}{\partial t} & +\nabla \cdot \left(\rho \boldsymbol{u}\right) = 0 , \\
     \frac{\partial \rho \boldsymbol{u}}{\partial t} & + \nabla \cdot \left(\rho \boldsymbol{u} u + P \right) = 0, \\
-    \frac{\partial \rho \varepsilon}{\partial t} & + \nabla \cdot \left[ \boldsymbol{u} \left( \rho\varepsilon + P \right) \right] = \frac{dE\rms{cool}}{dt} , 
+    \frac{\partial \rho \varepsilon}{\partial t} & + \nabla \cdot \left[ \boldsymbol{u} \left( \rho\varepsilon + P \right) \right] = \mathcal{L}\rms{T} , 
   \end{align}
 \end{subequations}
 
 \noindent
 where $\varepsilon$ is the total specific energy ($\varepsilon = \boldsymbol{u}^2/2 + e/\rho $), $\rho$ is the gas density, $e$ is the internal energy density, $P$ is the gas pressure and $u$ is the gas velocity.
-In order to simulate radiative losses, the parameter $dE_\text{cool}/dt$ is included, which is the energy loss rate per unit volume from the fluid due to gas and dust cooling.
+In order to simulate radiative losses, the parameter $\mathcal{L}\rms{T}$ is included, which is the energy loss rate per unit volume from the fluid due to gas and dust cooling.
 
 Spatial reconstruction using a piecewise linear method was performed, while the simulation was run with one of two numerical integrators, depending on the system stability.
 The integrators used were a 3\ts{rd} order accurate Runge-Kutta integrator (\texttt{rk3}), as well as a 4\ts{th} order accurate, 5-stage, 3 storage register strong stability preserving Runge-Kutta integrator (\texttt{ssprk5\_4}; \citet{ruuthHighOrderStrongStabilityPreservingRungeKutta2005}).
@@ -300,10 +300,18 @@ The number of sub-steps is determined by the estimated cooling timescale of the 
 Cooling is calculated via individual lookup tables from each wind.
 These lookup tables contain the normalised emissivity, $\Lambda\rms{w}(T)$ at a logarithmically spaced series of temperatures from $10^4 \, \si{\kelvin}$ to $10^9 \, \si{\kelvin}$.
 The cooling rate is determined for a cell by calculating the cell temperature and estimating $\Lambda\rms{w}(T)$ using linear interpolation between the nearest emissivity values in the lookup table.
-The energy loss is then calculated through the equation:
+As the two winds have significantly different abundances and can be thoroughly mixed in the WCR, we calculate an emissivity value for gas in a particular cell with the equation
 
 \begin{equation}
-  \frac{dE\rms{g}}{dt} = \left(\frac{\rho\rms{g}}{m\rms{H}}\right)^2 \Lambda\rms{w}(T),
+  \Lambda\rms{g}(T) = C\Lambda\rms{w,WR}(T) + (1-C)\Lambda\rms{w,OB}(T) , 
+\end{equation}
+
+\noindent
+where $C$ is the wind ``colour'', or mixing fraction, where 1 is a pure WR wind and 0 is a pure OB wind.
+The rate of change in energy per unit volume due to plasma and gas cooling, $\mathcal{L}\rms{g}$, is then calculated through the equation:
+
+\begin{equation}
+  \mathcal{L}\rms{g} = \left(\frac{\rho\rms{g}}{m\rms{H}}\right)^2 \Lambda\rms{g}(T),
 \end{equation}
 
 \noindent
@@ -344,7 +352,7 @@ Assuming a single average grain size the rate of change in the grain radius in a
 
 \noindent
 where $\xi$ is the grain sticking factor, $\rho\rms{C}$ is the carbon density ($\rho\rms{C} = X\rms{C} \rho\rms{g}$), $w\rms{C}$ is the Maxwell-Boltzmann RMS velocity for carbon ($w\rms{C} = \sqrt{3k\rms{B} T / 12m\rms{H}}$), $k\rms{B}$ is the Boltzmann constant and $\rho\rms{gr}$ is the grain bulk density.
-The rate of change in the mass of a single grain due to accretion, $dm\rms{gr,ac}/dt$, is calculated with the formulae:
+The rate of change in the mass of a single grain due to accretion, $dm\rms{gr,ac}/dt$, is calculated with the formula:
 
 \begin{equation}
   \frac{d m\rms{gr,acc}}{dt} = 4 \pi \rho\rms{gr} a^2 \frac{da}{dt} = \pi \xi \rho\rms{C} w\rms{C} a^2, \\
@@ -394,7 +402,7 @@ The rate of cooling is calculated using the uncharged grain case of the prescrip
 Grains are collisionally excited by collisions with ions and electrons, causing them to radiate.
 Similarly to the gas/plasma emission model used, the emitted photons are not re-adsorbed by the WCR medium, causing energy to be removed from the simulation.
 This therefore makes the assumption that the WCR is optically thin to far-infrared photons, which is observationally correct \citep{monnierKeckAperturemaskingExperiment2007,soulainSPHEREViewWolfRayet2018,callinghamAnisotropicWindsWolf2019}.
-The grain heating rate, $H\rms{coll}$, in \si{\erg\per\second} for a dust grain is calculated with the formulae:
+The grain heating rate, $H\rms{coll}$, in \si{\erg\per\second} for a dust grain is calculated with the formula:
 
 \begin{equation}
   \label{eq:p2-grainheat}
@@ -443,22 +451,14 @@ Excitation due to grain-grain collisions were not modelled, due to the limitatio
 In order to calculate the change in energy due to dust cooling, we find the radiative emissivity for dust, $\Lambda\rms{d}(T,a)$, to be
 
 \begin{equation}
-  \Lambda(T,a) = \frac{H\rms{coll} + H\rms{el}}{n\rms{H}} ,
-\end{equation}
-
-\noindent
-where $n\rms{H}$ is the number density of hydrogen in the gas.
-The energy loss rate from dust cooling, $dE\rms{d}/dt$, then calculated with the equation:
-
-\begin{equation}
-  \frac{dE\rms{d}}{dt} = n\rms{T} n\rms{d} \Lambda\rms{d} (T,a) , 
+  \mathcal{L}\rms{d} = n_\text{d} (H\rms{coll} + H\rms{el}) ,
 \end{equation}
 
 \noindent
 and added to the gas/plasma energy loss rate, such that the total energy loss rate is:
 
 \begin{equation}
-  \frac{dE\rms{cool}}{dt} = \frac{dE\rms{g}}{dt} + \frac{dE\rms{d}}{dt} .
+  \mathcal{L}\rms{T} = \mathcal{L}\rms{g} + \mathcal{L}\rms{d} .
 \end{equation}
 
 \begin{table}
@@ -545,7 +545,7 @@ The fraction of the WR wind that is passed through the WCR is given by the equat
 
 \noindent
 where $\theta\rms{WR}$ is the opening angle of the WR shock front ($\theta\rms{WR} \approx 2 \tan^{-1}(\eta^{1/3}) + \pi/9$, see \cite{pittardCollidingStellarWinds2018}).
-$\mdot\rms{d,max}$ is then calculated with the formulae:
+$\mdot\rms{d,max}$ is then calculated with the formula
 
 \begin{equation}
   \label{eq:p2-maxdustrate}
@@ -761,21 +761,21 @@ We would find a significantly lower average dust production rate over the course
 \begin{figure*}
   \centering
   \includegraphics[width=0.95\linewidth]{assets/periastron-3-rho.pdf}
-  \caption{Gas density in a simulation of the WR140 system shortly before, during, and after periastron. The value of $\chi$ is calculated using Eq. \ref{eq:p2-chi} and the WR wind parameter is noted in each panel. The simulation becomes dominated by instabilities after periastron. These instabilities persist despite the system behaving adiabatically at $\Phi = 0.99$, when the  orbital separation distance is identical. This suggests that the radiative behaviour of the post-shock WCR is due to other factors, in addition to $d\rms{sep}$.}
+  \caption[Gas density in a simulation of the WR140 system]{Gas density in a simulation of the WR140 system shortly before, during, and after periastron. The value of $\chi$ is calculated using Eq. \ref{eq:p2-chi} and the WR wind parameter is noted in each panel. The simulation becomes dominated by instabilities after periastron. These instabilities persist despite the system behaving adiabatically at $\Phi = 0.99$, when the  orbital separation distance is identical. This suggests that the radiative behaviour of the post-shock WCR is due to other factors, in addition to $d\rms{sep}$.}
   \label{fig:p2-fullpage-rho}
 \end{figure*}
 
 \begin{figure*}
   \centering
   \includegraphics[width=0.95\linewidth]{assets/periastron-3-rhod.pdf}
-  \caption{Dust density in a simulation of the WR140 system shortly before, during, and after periastron. Dust growth occurs as a direct result of the formation of cold, dense gas in the post-shock WCR.}
+  \caption[Dust density in a simulation of the WR140 system]{Dust density in a simulation of the WR140 system shortly before, during, and after periastron. Dust growth occurs as a direct result of the formation of cold, dense gas in the post-shock WCR.}
   \label{fig:p2-fullpage-rhod}
 \end{figure*}
 
 \begin{figure*}
   \centering
   \includegraphics[width=0.95\linewidth]{assets/periastron-3-r0.pdf}
-  \caption{Wind ``colour'' in a simulation of the WR140 system shortly before, during, and after periastron. A colour of 1 represents a pure WR wind and a colour of 0 represents a pure OB wind. We find that the wind undergoes more mixing during and after periastron.}
+  \caption[Wind ``colour'' in a simulation of the WR140 system]{Wind ``colour'' in a simulation of the WR140 system shortly before, during, and after periastron. A colour of 1 represents a pure WR wind and a colour of 0 represents a pure OB wind. We find that the wind undergoes more mixing during and after periastron.}
   \label{fig:p2-fullpage-r0}
 \end{figure*}
 
@@ -879,7 +879,7 @@ Furthermore, an increased wind velocity ratio occurs after periastron due to the
 % Further simulations of this system in particular would involve simulating a full orbit, through the use of AMR and increased computing time.
 % Other avenues of research include the effect on dust formation due to the influence of radiative line driving and sudden braking, as well as a more complex, multi-fluid dust model where dust grains are not explicitly coupled to the stellar wind.
 
-\section{Acknowledgements}
+\section*{Acknowledgements}
 
 This work was undertaken on ARC4, part of the High Performance Computing facilities at the University of Leeds, UK.
 We would also like to thank P. A. Crowther for his work on the Galactic Wolf-Rayet Catalogue (\url{pacrowther.staff.shef.ac.uk/WRcat}).
